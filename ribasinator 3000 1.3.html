@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="pt-br"/>
+<head>
+	<meta charset="utf-8"/>
+	<title> Ribasinator 3000 </title>
+	<style type="text/css">
+	<!--
+		body {background-color: black;}
+			p, font {color: white; font-family: roboto; font-size: 15px;}
+			h1, font {color: yellow; font-family: roboto; font-size: 30px; text-align: center}
+			h2, font {color: white; font-family: roboto; font-size: 25px;}
+			hr {color: white;}
+	--> </style>
+	<!-- As Fórmulas -->
+	<script language="JavaScript">
+
+	function doBhaskara(){
+	a = prompt("Valor a");
+	b = prompt("Valor b");
+	c = prompt("Valor c");
+	delta = Math.pow(b,2)+(-4*a*c);
+	deltaTest = Math.floor(Math.sqrt(delta))
+	deltaTestI = Math.floor(Math.sqrt(-delta))
+	if (delta>=0 && (Math.sqrt(delta) == deltaTest)) {
+		xa = ((-b)+Math.sqrt(delta))/(2*a);
+		xb = ((-b)-Math.sqrt(delta))/(2*a);
+		alert("x'=" + xa + ";   x''=" + xb);}
+	else if (delta >= 0 && (Math.sqrt(delta) != deltaTest)) {
+		alert("x'=(" + (-b) + "+√" + delta + ")/" + (2*a) + ";   x''=(" + (-b) + "-√" + delta + ")" + "/" + (2*a));
+		}
+	else if (delta < 0 && (Math.sqrt(-delta) == deltaTestI)) {
+		coef = ((-b)/2*a);
+		coefIm = (Math.sqrt(-delta)/(2*a));
+		alert("x'=" + coef + "+" + coefIm + "i" + ";   x''=" + coef + "-" + coefIm + "i");}
+	else if (delta<0 && (Math.sqrt(-delta) != deltaTestI)) {
+		alert("x'=(" + (-b) + "+√" + (-delta) + "i)/" + (2*a) +  ";   x''=(" + (-b) + "-√" + (-delta) + "i)/" + (2*a));}
+	else {alert ("Erro! Talvez você digitou algo errado?")}
+	}
+	
+	function doLog(){
+	a=prompt ("Valor a (base)")
+	b=prompt ("Valor b (logaritimando)")
+	x=prompt ("Valor x (logaritimo)")
+	if (b == "x") {
+		a=Math.pow(a,x)
+		alert("b = " + b)
+	}
+	else if (x == "x") {
+		x=Math.log(b) / Math.log(a)
+		alert("x = " + x)
+	}
+	else if (a == "x") {
+		if (x == 2) {
+		a=Math.sqrt(b)
+		alert("a = " + a)
+		}
+		else if (x==3){
+		a = Math.cbrt(b)
+		alert("a = " + a)
+		}
+		else if (Math.log2(x) == Math.floor(Math.log2(x))){
+			a=b
+			while (x>0) {
+				a *= 0.5
+				x -= 1
+			}
+			alert(a)
+		}
+	}
+	else {
+		alert("Erro! Talvez você digitou algo errado?")}
+	}
+
+	function doTabSAC(){
+		valorPresente = parseFloat(prompt("Insira o Valor Presente"))
+		numeroParcelas = parseFloat(prompt("Insira a quantidade de Parcelas"))
+		porcentagemJuros = parseFloat(prompt("Insira o Juro em Porcentagem (não coloque o %)"))
+		parcela = 0
+		total = 0
+		totalJuros = 0
+		totalAmortizacao = 0
+		prestacao = 0
+		porcentagemJuros = porcentagemJuros * 0.01
+		amortizacao = valorPresente/numeroParcelas
+		while(valorPresente>=amortizacao){
+			prestacao += 1
+			juros = valorPresente * porcentagemJuros
+			valorPresente -= amortizacao
+			totalJuros += juros
+			parcela = juros + amortizacao
+			total += parcela
+			alert("Prestação= " + prestacao)
+			alert("Valor da Parcela= " + parcela)
+			alert("Valor da Amortização= " + amortizacao)
+			alert("Valor dos Juros= " + juros)
+			alert("Valor Saldo Devedor= " + valorPresente)
+			}
+		totalAmortizacao = amortizacao * prestacao
+		alert("Valor total das Parcelas = " + total)		
+		alert("Valor total da Amortização = " + totalAmortizacao)
+		alert("Valor total dos Juros = " + totalJuros)
+	}
+	
+	function doTabPrice(){
+		valorPresente = parseFloat(prompt("Insira o Valor Presente"))
+		numeroParcelas = parseFloat(prompt("Insira a quantidade de Parcelas"))
+		porcentagemJuros = parseFloat(prompt("Insira o Juro em Porcentagem (não coloque o %)"))
+		total = 0
+		totalJuros = 0
+		totalAmortizacao = 0
+		prestacao = 0
+		porcentagemJuros = porcentagemJuros * 0.01
+		parcela = valorPresente * ((Math.pow(1 + porcentagemJuros, numeroParcelas) * porcentagemJuros) / (Math.pow(1 + porcentagemJuros, numeroParcelas) - 1))
+		while(numeroParcelas > prestacao){
+			prestacao += 1
+			juros = valorPresente * porcentagemJuros
+			amortizacao = parcela - juros
+			valorPresente -= amortizacao
+			totalJuros += juros
+			totalAmortizacao += amortizacao
+			alert("Prestação= " + prestacao)
+			alert("Valor da Parcela= " + parcela)
+			alert("Valor da Amortização= " + amortizacao)
+			alert("Valor dos Juros= " + juros)
+			alert("Valor Saldo Devedor= " + valorPresente)
+			}
+		total = parcela * prestacao
+		alert("Valor total das Parcelas = " + total)		
+		alert("Valor total da Amortização = " + totalAmortizacao)
+		alert("Valor total dos Juros = " + totalJuros)
+			}
+
+	function doMultiMatriz(){		
+		tamanhoLinhaA = parseInt(prompt ("Insira a quantina de linhas da primeira matriz "));
+		tamanhoColunaA =parseInt(prompt ("Insira a quantia de colunas da primeira matriz "));
+		tamanhoLinhaB = parseInt(prompt ("Insira a quantina de linhas da segunda matriz "));
+		tamanhoColunaB =parseInt(prompt ("Insira a quantia de colunas da segunda matriz "));
+		let linha=[];
+		let coluna=[];
+		let matrizA=[];
+		let matrizB=[];
+		let matrizC=[];
+		let i=0;
+		let iFinal=0;
+
+		if (tamanhoLinhaA == tamanhoColunaB) {
+			testeColuna = tamanhoColunaA;
+			while (testeColuna > 0) {
+				linha=[]
+				testeLinha = tamanhoLinhaA;
+				while (testeLinha>0) {
+					numLinha = tamanhoLinhaA - testeLinha + 1;
+					numColuna = tamanhoColunaA - testeColuna + 1;
+					i = parseFloat(prompt("Insira o valor de a" + numColuna + numLinha));
+					linha.push(i);
+					testeLinha -= 1;
+				}
+				matrizA.push(linha);
+				testeColuna -= 1;
+			}
+			testeLinha=tamanhoLinhaB;
+			while (testeLinha > 0) {
+				coluna=[]
+				testeColuna = tamanhoColunaB;
+				while (testeColuna>0) {
+					numLinha = tamanhoLinhaB - testeLinha + 1;
+					numColuna = tamanhoColunaB - testeColuna + 1;
+					i=parseFloat(prompt("Insira o valor de b" + numColuna + numLinha));
+					coluna.push(i);
+					testeColuna -= 1;
+				}
+				matrizB.push(coluna);
+				testeLinha -= 1;
+			}
+		
+			const fatorC = matrizB[0].length;
+			testeColuna = tamanhoColunaA;
+			while (testeColuna > 0) {
+				linha=[]
+				testeLinha = tamanhoLinhaB;
+				while (testeLinha>0) {
+					numLinha = tamanhoLinhaB - testeLinha;
+					numColuna = tamanhoColunaA - testeColuna;
+					let n = 0;
+					iFinal = 0;
+					while (n<fatorC) {
+						valorA = matrizA[numColuna][n];
+						valorB = matrizB[numLinha][n];
+						i = valorA * valorB;
+						iFinal += i;
+						n += 1;
+					}
+					linha.push(iFinal);
+					testeLinha -= 1;
+				}
+				matrizC.push(linha);
+				matrizC.push("\n")
+				testeColuna -= 1;
+			}
+			alert(matrizC);
+		}
+		else {
+			alert("Erro! A quantidade de linhas da primeira matriz deve ser igual a quantidade de colunas da segunda.")
+		}
+	}
+
+	</script>
+</head>
+<body>
+<h1> SEJA BEM VINDO AO RIBASINATOR 3000 </h1>
+<p> Essa é uma calculadora de diversos progrmas que eu planejo ir aumentando para auxiliar todos durante todo tipo de exercício ribático. 
+Caso tenha alguma sugestão de fórmula que deseja que seja adicionada no futuro, me manda um zap. </p>
+<hr>
+	<h2> Calculadora de Bhaskára </h2>
+	<p> Esse garanhão consegue calcular Bhaskaras instantaneamente, podendo até mesmo calcuar raízes imaginárias. 
+	Raízes quadradas não exatas apareceram na forma não-fatorada. Ex: √17.</p>
+	<p> <b>Formato: ax²+bx+c=0:</b> </p>
+	<p> Observação: Inserir frações e números não-inteiros separado por ponto. Ex: 5/2 → 2.5; 5,6 → 5.6; Usar hífen (-) para menos. 
+	<p> <b> ISSO VALE PARA TODAS AS OUTRAS FÓRMULAS </b> </p>
+	<form> 
+	<input type="button" value="Iniciar Cálculo" onClick="doBhaskara()"> 
+	</form>
+<hr>
+	<h2> Função Logaritmica </h2>
+	<p> Esse meninão aqui consegue transformar Logs em sua expressão original e vice-versa. Digite 'x' para a variável que é a icognita. </p>
+	<p> <b>Formato: Log(a) b = x:</b> </p>
+	<p> Observação: As vezes, há um erro de arredontamento, que não dá o resultado perfeito. Exemplo: 1.500000000000002=1,5
+	<form> 
+	<input type="button" value="Iniciar Cálculo" onClick="doLog()"> 
+	</form>
+<hr>
+	<h2> Tabela SAC e Price </h2>
+	<p> Aqui moram duas incriveis calculadoras de Tabela SAC e Price. Coloque os valores conforme indicado nos campos, e receba por ordem os valors para preenxer na tabela. </p>
+	<p> Observação: As vezes, há imprecisão com dizimas periódicas, que mudam um pouco o resultado final. </p>
+	<form> 
+	<input type="button" value="Tabela SAC" onClick="doTabSAC()"> 
+	<input type="button" value="Tabela Price" onClick="doTabPrice()"> 
+	</form>
+<hr>
+<h2> Multiplicação de Matrizes </h2>
+	<p> Esse ser poderoso é capaz de multiplicar matrizes de qualquer tamanho! Apenas coloque os valores conforme pedido. </p>
+	<p> Observação: Fique atento a ordem pedida, pois a matriz A é preenchida por linhas, enquanto a B é por colunas. </p>
+	<form> 
+	<input type="button" value="Iniciar Cálculo" onClick="doMultiMatriz()"> 
+	</form>
+<hr>
+</body>
